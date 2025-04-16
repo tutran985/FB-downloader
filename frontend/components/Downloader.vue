@@ -139,7 +139,7 @@ export default {
       this.error = null
       
       try {
-        const response = await axios.post('http://localhost:8001/fetch', {
+        const response = await axios.post('https://be-download.web.app/fetch', {
           url: this.videoUrl
         })
         
