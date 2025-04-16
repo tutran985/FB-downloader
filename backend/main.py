@@ -1,17 +1,32 @@
-from fastapi import FastAPI, Request
+from time import time
+from fastapi import FastAPI, Request, __version__
 from fastapi.middleware.cors import CORSMiddleware
 import httpx
 
 app = FastAPI(docs_url=None, redoc_url=None)
-PORT = 8001
 
-# Production CORS settings
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Replace with your domain
-    allow_methods=["POST"],
-    allow_headers=["*"],
-)
+html = f"""
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FastAPI on Vercel</title>
+        <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
+            <h1>Hello from FastAPI@{__version__}</h1>
+            <ul>
+                <li><a href="/docs">/docs</a></li>
+                <li><a href="/redoc">/redoc</a></li>
+            </ul>
+            <p>Powered by <a href="https://vercel.com" target="_blank">Vercel</a></p>
+        </div>
+    </body>
+</html>
+"""
+@app.get('/ping')
+async def hello():
+    return {'res': 'pong', 'version': __version__, "time": time()}
 
 @app.post("/fetch")
 async def fetch_video(data: dict):
