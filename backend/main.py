@@ -4,7 +4,13 @@ from fastapi.middleware.cors import CORSMiddleware
 import httpx
 
 app = FastAPI(docs_url=None, redoc_url=None)
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or ["http://localhost:3000"] if you want to be specific
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 html = f"""
 <!DOCTYPE html>
 <html>
