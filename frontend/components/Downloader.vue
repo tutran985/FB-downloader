@@ -139,7 +139,7 @@ export default {
       this.error = null
       
       try {
-        const response = await axios.post('https://be-download.web.app/fetch', {
+        const response = await axios.post('https://fb-downloader-be-2.vercel.app/fetch', {
           url: this.videoUrl
         })
         
